@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Our Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Style for the horizontal line */
+        .line {
+            position: fixed;
+            top: 0;
+            left: 2in; /* 2-inch margin on the left */
+            right: 2in; /* 2-inch margin on the right */
+            width: 100%;
+            border-top: 1px solid #ccc; /* Add a horizontal line */
+        }
+
+        /* Style for the menu bar */
+        .menu {
+            position: fixed;
+            top: 0px;
+            right: 0;
+            width: 100%;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: #1C3D52;
+            text-align: right;
+        }
+
+        /* Your existing styles for the rest of the page */
+        body {
+            position: relative;
+            font-family: 'impacts', cursive;
+            background-color: #00021F;
+            color: #fff;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .menu li {
+            display: inline;
+            margin-right: 60px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #fff;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu a:hover {
+            background-color: cyan;
+            border-radius: 100%;
+        }
+
+        .menu a:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid transparent;
+            border-radius: 100px;
+            pointer-events: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .menu a:hover:before {
+            border-color: cyan;
+        }
+        .menu a:hover {
+            border-color: cyan;
+            background-color: #1C3D52;
+        }
+
+        .menu i {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .menu i:hover {
+            color: #3388A7;
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+            color: neonblue;
+        }
+        .highlighted {
+            font-weight: bold;
+            color: neonblue;
+        }
+        .social-icons {
+            margin-top: 0.5in;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            color: cyan;
+            border: 3px solid transparent;
+            border-radius: 100px;
+            padding: 8px;
+            margin-right: 10px;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+            position: relative;
+        }
+
+        .social-icons a:hover {
+            border-color: cyan;
+            background-color: #1C3D52;
+        }
+
+        .social-icons a:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid transparent;
+            border-radius: 100px;
+            pointer-events: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .social-icons a:hover:before {
+            border-color: cyan;
+        }
+
+
+        .name h2 {
+            font-size: 46px;
+            margin-bottom: 5px;
+        }
+        .intro p {
+            font-weight: normal;
+        }
+        .intro {
+            margin-top: 0.2in;
+        }
+
+        /* Center the "Uppercase Converter" container vertically */
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 200%; /* Adjust the width as needed */
+            max-width: 900px; /* You can set a maximum width if necessary */
+            margin: 0 auto; /* Center the container horizontally */
+            top: 50%; /* Adjust the top position as needed */
+
+
+        }
+        .image {
+            position: absolute;
+            right: 0.9in;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+            height: auto;
+        }
+
+        /* Style the "Convert" button */
+        #convert-button, #calculate-button {
+            margin-top: 10px;
+        }
+
+        /* Style the white box */
+        #input-box, #main-box {
+            background: white;
+            padding: 50px;
+            border-radius: 4px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px 5px rgba(128, 0, 128, 0.5); /* Purple glow effect */
+        }
+        #input-field, #radius-field {
+            width: 95%; /* Adjust the width as needed */
+            padding: 10px;
+            font-size: 16px; /* Adjust the font size as needed */
+            border: 2px solid black;
+            border-radius: 5px;
+            box-shadow: 0 0 20px 5px rgba(116, 114, 116, 0.253); /* Purple glow effect */
+                }
+        #convert-button, #calculate-button {
+            margin-top: 20px;
+            width: 60%; /* Adjust the width as needed */
+            padding: 10px;
+            font-size: 16px; /* Adjust the font size as needed */
+            margin-left: 50px; /* Move the button to the right */
+            display: block; /* Make the button a block element to occupy the full width */
+            background-color: skyblue; /* Set the background color to sky blue */
+            color: white; /* Set the text color to white */
+            border: black; /* Remove the default button border */
+            border-radius: 5px; /* Add a border-radius for a soft edge */
+            transition: background-color 0.3s, box-shadow 0.3s; /* Add a transition for smooth color change and box-shadow */
+        }
+        
+        #convert-button:hover, #calculate-button:hover {
+            background-color: cyan;
+            box-shadow: 0 0 5px cyan;
+            border: 2px solid cyan;
+        }
+        
+        #convert-button:active, #calculate-button:active {
+            background-color: cyan; /* Change the background color to cyan when clicked */
+        }
+    
+        /* Change font color to black for the uppercase result */
+        #converted-string {
+            color: black;
+        }
+        /* Change font color to black for the "Your converted string" heading */
+        #result p {
+            color: black;
+            width: 100%; /* Set the width to 100% to center it within the main container */
+            text-align: center; /* Center the text horizontally */
+            margin-top: 20px; /* Adjust the top margin as needed */
+            left: 0; /* Remove the left position */
+        }
+    </style>
+</head>
+<body>
+    <div class="line"></div>
+
+    <div class="menu">
+        <ul>
+            <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="/profile"><i class="fas fa-user"></i> About Me</a></li>
+            <li><a href="/works"><i class="fas fa-code"></i> Works</a></li>
+            <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+    </div>
+
+    <div id="container">
+        <h1>Circle Area Calculator</h1>
+
+        <div id="main-box">
+            <div id="input-container">
+                <input type="text" id="radius-field" placeholder="Enter the radius of the circle">
+                <button id="calculate-button" onclick="calculateArea()">Calculate</button>
+            </div>
+            <div id="result">
+                <p>The Calculated Area is:</p>
+                <p id="calculated-area"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateArea() {
+            var radiusField = document.getElementById("radius-field");
+            var calculatedAreaField = document.getElementById("calculated-area");
+            var radius = parseFloat(radiusField.value);
+            if (isNaN(radius) || radius < 0) {
+                calculatedAreaField.textContent = "Invalid input. Please enter a non-negative number.";
+            } else {
+                var area = Math.PI * radius * radius;
+                calculatedAreaField.textContent = area.toFixed(2);
+            }
+        }
+    </script>
+</body>
+</html>
