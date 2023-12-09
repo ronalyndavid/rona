@@ -5,7 +5,7 @@ from email.message import EmailMessage
 app = Flask(__name__)
 app = Flask(__name__, static_url_path='/static')
 
-# Replace these values with your email server information
+
 EMAIL_ADDRESS = "ronalyndavid1013@gmail.com"
 EMAIL_PASSWORD = "Prettygirl101303"
 
@@ -77,13 +77,70 @@ def contact():
                 smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
                 smtp.send_message(msg)
         except Exception as e:
-            # Handle any email sending errors here
+           
             print(e)
             return "Error sending email"
 
         return "Email sent successfully"
 
     return render_template('Contacts.html')
+def merge_sorted_linked_lists(list1, list2):
+    dummy = LNode()
+    current = dummy
+
+    while list1 is not None and list2 is not None:
+      
+        if isinstance(list1.value, (int, float)) and isinstance(list2.value, (int, float)):
+            if list1.value < list2.value:
+                current.next = list1
+                list1 = list1.next
+            else:
+                current.next = list2
+                list2 = list2.next
+        elif isinstance(list1.value, str) and isinstance(list2.value, str):
+          
+            if list1.value.lower() < list2.value.lower():
+                current.next = list1
+                list1 = list1.next
+            else:
+                current.next = list2
+                list2 = list2.next
+        else:
+            raise ValueError("Unsupported data types in linked lists")
+
+        current = current.next
+
+    if list1 is not None:
+        current.next = list1
+    elif list2 is not None:
+        current.next = list2
+
+    return dummy.next
+
+
+
+@app.route('/', methods=['GET', 'POST'])
+def merge_sorted_lists():
+    if request.method == 'POST':
+        values1 = request.form['values1'].split()
+        values2 = request.form['values2'].split()
+
+        linked_list1 = sorted_linked_list(values1)
+        linked_list2 = sorted_linked_list(values2)
+
+        if linked_list1 is not None and linked_list2 is not None:
+            merged_linked_list = merge_sorted_linked_lists(linked_list1, linked_list2)
+            merged_values = []
+
+            while merged_linked_list is not None:
+                merged_values.append(str(merged_linked_list.value))
+                merged_linked_list = merged_linked_list.next
+
+            result = "->".join(merged_values)
+            print("Result:", result)  
+            return render_template('mergelist.html', result=result)
+
+    return render_template('mergelist.html', result=None)
 
 if __name__ == "__main__":
     app.run(debug=True)
